@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddEmployeeActivity"></activity>
+        <activity android:name=".FindEmployeeContract"></activity>
+        <activity android:name=".AddEmployeeActivity" />
         <activity android:name=".AddCompanyActivity" />
         <activity android:name=".EmployerMainActivity" />
         <activity

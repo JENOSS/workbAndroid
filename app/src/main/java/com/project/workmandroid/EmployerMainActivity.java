@@ -67,16 +67,16 @@ public class EmployerMainActivity extends AppCompatActivity {
                     if(result.equals(check)) {
                         String companyname = response.body().getCompanyname();
                         // Login Cookie
-                        SharedPreferences sf = getSharedPreferences("sFile",MODE_PRIVATE);
+                        SharedPreferences sf2 = getSharedPreferences("sFile",MODE_PRIVATE);
 
-                        String checkUse = sf.getString("company","");
+                        String checkUse = sf2.getString("company","");
                         if(checkUse == "") {
-                            SharedPreferences.Editor editor = sf.edit();
+                            SharedPreferences.Editor editor = sf2.edit();
                             editor.putString("company", companyname);
                             editor.commit();
                         }else{
-                            SharedPreferences.Editor editor = sf.edit();
-                            editor.clear();
+                            SharedPreferences.Editor editor = sf2.edit();
+                            editor.remove("company");
                             editor.putString("company", companyname);
                             editor.commit();
                         }
@@ -110,7 +110,7 @@ public class EmployerMainActivity extends AppCompatActivity {
         mCheck.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EmployerMainActivity.this, CheckContractActivity.class);
+                Intent intent = new Intent(EmployerMainActivity.this, FindEmployeeContract.class);
                 startActivity(intent);
             }
         });

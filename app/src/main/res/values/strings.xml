@@ -44,6 +44,7 @@
     <string name="error_imageView">이미지가 열리지 않습니다</string>
     <string name="employee_email">근로자 이메일</string>
     <string name="action_add_employee">근로자 추가하기</string>
+    <string name="action_find_employee">근로계약서 확인하기</string>
     <string name="add_employee">근로자 추가</string>
     <string name="term">기간</string>
     <string name="time">근무시간</string>

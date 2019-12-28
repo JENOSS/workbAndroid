@@ -39,7 +39,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
     public String employerPhoneNumber;
 
 
-    public String employyeeid ;
+    public String employeeid ;
     public int wage;
     public int period;
     public int workday;
@@ -69,7 +69,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                employyeeid = mEmailView.getText().toString();
+                employeeid = mEmailView.getText().toString();
                 wage = Integer.parseInt(mPayView.getText().toString());
                 period = Integer.parseInt(mTermView.getText().toString());
                 workday= Integer.parseInt(mDayView.getText().toString());
@@ -92,8 +92,8 @@ public class AddEmployeeActivity extends AppCompatActivity {
 
                 //use cookie
                 SharedPreferences sf2 = getSharedPreferences("sFile",MODE_PRIVATE);
-                String employyerid = sf.getString("userid","nop");
-                Log.e("employerid",employyerid);
+                String employerid = sf2.getString("userid","nop");
+                Log.e("employerid",employerid);
 
                 HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
                 logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -108,7 +108,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
                         .build();
                 ServiceApi service = retrofit.create(ServiceApi.class);
 
-                Call<getUser> call = service.get_user(employyerid);
+                Call<getUser> call = service.get_user(employerid);
 
                 call.enqueue(new Callback<getUser>() {
                     @Override
@@ -141,7 +141,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
 
                 ServiceApi service2 = retrofit.create(ServiceApi.class);
 
-                Call<getUser> call2 = service.get_user(employyeeid);
+                Call<getUser> call2 = service2.get_user(employeeid);
 
                 call2.enqueue(new Callback<getUser>() {
                     @Override
@@ -171,10 +171,41 @@ public class AddEmployeeActivity extends AppCompatActivity {
                     }
                 });
 
+                ServiceApi service3 = retrofit.create(ServiceApi.class);
+
+                Call<ContractAdd> call3 = service3.post_contract(company, employeeName,employerName,employeePhoneNumber,employerPhoneNumber,year,month,day,wage,workday,workHour,period);
+
+                call3.enqueue(new Callback<ContractAdd>() {
+                    @Override
+                    public void onResponse(Call<ContractAdd> call2, Response<ContractAdd> response) {
+                        if(response.isSuccessful()){
+                            response.body();
+                            String result = response.body().getResult();
+                            String check = "1";
+                            if(result.equals(check)) {
+                                Log.i("result", result);
+                                Log.e(TAG, "Success");
+
+                            }
+                            else {
+                                Log.i("result", result);
+                                Log.e(TAG, "Fail");
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ContractAdd> call, Throwable t) {
+                        Log.e(TAG, "Fail");
+                    }
+                });
+
+
 
 
 
             }
+
+
 
         });
 

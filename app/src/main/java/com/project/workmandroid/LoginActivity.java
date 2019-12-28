@@ -271,13 +271,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             SharedPreferences sf = getSharedPreferences("sFile",MODE_PRIVATE);
 
                             String checkUse = sf.getString("userid","");
-                            if(checkUse == "") {
+                            if(checkUse.equals("")) {
                                 SharedPreferences.Editor editor = sf.edit();
                                 editor.putString("userid", getUserid);
                                 editor.commit();
                             }else{
                                 SharedPreferences.Editor editor = sf.edit();
-                                editor.clear();
+                                editor.remove("userid");
                                 editor.putString("userid", getUserid);
                                 editor.commit();
                             }

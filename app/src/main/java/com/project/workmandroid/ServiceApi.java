@@ -82,5 +82,10 @@ public interface ServiceApi {
             @Path("userid") String userid
     );
 
+    @GET("api/getPendingPTJContract/{phoneNumber}")
+    Call<getContract> get_contract(
+            @Path("phoneNumber") String phoneNumber
+    );
+
 
 }
